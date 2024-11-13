@@ -124,3 +124,103 @@
     - 큰 자료형에서 작은 자료형으로 변환할때 캐스팅 연산자를 통해 변환시키는 것
         - 데이터 손실이 있을수 있기에 수동으로 변환되어야 함
     - 값이 자료형의 범위를 초과하면 데이터가 왜곡될 수 있음
+
+### 재귀함수
+
+- 자기 자신을 호출하는 함수
+    - 반복적으로 쪼갤 수 있는 문제를 해결할 때 사용
+- 기저조건
+    - 재귀호출을 멈추는 조건
+    - 무한 호출로 인해 StackOverflow가 발생할 수 있기에 반드시 포함되어야 함
+- 예제
+    
+    ```java
+    public class Fibonacci {
+        public static int fibonacci(int n) {
+            // 기저 조건
+            if (n == 0) return 0;
+            if (n == 1) return 1;
+            // 재귀 호출
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+        
+        public static void main(String[] args) {
+            System.out.println(fibonacci(5)); // 출력: 5
+        }
+    }
+    
+    ```
+    
+
+### 문자열,정수,실수 포맷 지정자
+
+- String.format()혹은 System.out.printf()를 사용
+    
+
+    | 구분     | 지정자 | 설명                                |
+    |----------|--------|-------------------------------------|
+    | 문자열   | `%s`   | 문자열 출력                         |
+    | 문자     | `%c`   | 문자 출력 (Unicode character)       |
+    | 정수     | `%d`   | 10진수 정수 출력                    |
+    | 16진수   | `%x`   | 16진수 정수 출력                    |
+    | 8진수    | `%o`   | 8진수 정수 출력                     |
+    | 실수     | `%f`   | 소수점 포함 실수 출력               |
+
+- 예제
+    
+    ```java
+    public class StringFormatting {
+        public static void main(String[] args) {
+            String name = "Alice";
+            int age = 25;
+            double score = 92.5;
+    
+            System.out.printf("이름: %s, 나이: %d, 점수: %.1f\n", name, age, score);
+        }
+    }
+    -> 이름: Alice, 나이: 25, 점수: 92.5
+    ```
+    
+
+### 날짜 포맷 지정자
+
+| 구분     | 지정자 | 설명                                |
+|----------|--------|-------------------------------------|
+| 요일     | `%tA`  | 요일 출력 (예: Monday, 화요일)       |
+| 월 이름  | `%tB`  | 월 이름 출력 (예: January, 11월)    |
+| 연도     | `%tY`  | 4자리 연도 출력 (예: 2024)          |
+| 월       | `%tm`  | 월 (숫자 형식, 예: 11)             |
+| 일       | `%td`  | 일 (숫자 형식, 예: 13)             |
+| 시간     | `%tH`  | 시간 (24시간제, 예: 14)            |
+| 분       | `%tM`  | 분 (예: 45)                        |
+| 초       | `%tS`  | 초 (예: 30)                        |
+
+- 예제
+    
+    ```java
+    import java.util.Date;
+    
+    public class DateFormatting {
+        public static void main(String[] args) {
+            Date now = new Date();
+            System.out.printf("오늘은 %tY년 %tm월 %td일 %tA입니다.\n", now, now, now, now);
+            System.out.printf("현재 시간: %tH시 %tM분 %tS초\n", now, now, now);
+        }
+    }
+    -> 오늘은 2024년 11월 13일 화입니다.
+    	 현재 시간 : 15시 45분 00초
+    ```
+
+### pacakge와 classpath 중요성
+
+- package
+    - 관련 클래스들을 논리적으로 그룹화 가능
+        - ex) com.myapp.controller / com.myapp.service / com.myapp.model
+    - package로 인해 고유한 네임스페이스를 얻게 됨
+        - ex) com.game.User / com.app.User
+- classpath
+    - 외부 라이브러리 사용시 JAR파일 경로를 제대로 추가해야 사용 가능
+        - IDE에서 자동으로 추가
+    - 협업시 외부 라이브러리 의존성이 누락되면 빌드,실행 오류 발생
+        - maven, gradle로 관리 가능
+            - IDE에서 자동으로 관리
