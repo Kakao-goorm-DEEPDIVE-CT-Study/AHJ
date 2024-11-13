@@ -101,37 +101,26 @@
 - **Math.PI**
     - $\pi$
 
-### 조건문
 
-- if문
     
-    ```java
-    if(조건문){
-    	body;
-    }
-    ```
-    
-- if else 문
-    
-    ```java
-    if(조건문){
-    	body;
-    else{
-    	body;
-    }
-    ```
-    
-- else if 문
-    
-    ```java
-    if(조건문){
-    	body;
-    else if(조건문){
-    	body;
-    else{
-    	body;
-    }
-    ```
-    
+### EscapeCharacter
 
+| Escape Sequence | 설명                               | 예제 출력                                       |
+|------------------|------------------------------------|-------------------------------------------------|
+| `\n`             | 줄바꿈 (New Line)                 | `"Hello\nWorld"` → <br>Hello<br>World           |
+| `\t`             | 탭 (Tab)                          | `"Hello\tWorld"` → Hello    World               |
+| `\\`             | 백슬래시 (`\`) 출력                | `"C:\\Users\\Name"` → C:\Users\Name             |
+| `\"`             | 큰따옴표 (`"`) 출력                | `"She said, \"Hello!\""` → She said, "Hello!"   |
+| `\'`             | 작은따옴표 (`'`) 출력              | `'It\'s a book'` → It's a book                  |
+| `\r`             | 캐리지 리턴 (Carriage Return)     | OS에 따라 줄바꿈으로 작동 (Windows)             |
+| `\b`             | 백스페이스 (Backspace)            | `"abc\b"` → ab                                  |
 
+### 형 변환(Type Casting)
+
+- 묵시적 형 변환
+    - 작은 자료형을 큰 자료형으로 변환할때 자동으로 변환되는 것
+        - 데이터 손실이 없기에 자동으로 변환되어도 괜찮음
+- 명시적 형 변환
+    - 큰 자료형에서 작은 자료형으로 변환할때 캐스팅 연산자를 통해 변환시키는 것
+        - 데이터 손실이 있을수 있기에 수동으로 변환되어야 함
+    - 값이 자료형의 범위를 초과하면 데이터가 왜곡될 수 있음
