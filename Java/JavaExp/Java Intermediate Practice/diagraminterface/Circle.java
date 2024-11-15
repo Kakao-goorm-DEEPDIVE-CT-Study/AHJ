@@ -1,8 +1,8 @@
 package java_intermediate.diagraminterface;
 
 public class Circle implements DiagramInterface{
-    double area;
-    int radius;
+    private double area;
+    private int radius;
     public Circle(int radius){
         this.radius = radius;
     }
@@ -14,6 +14,6 @@ public class Circle implements DiagramInterface{
 
     @Override
     public void display() {
-        System.out.println("Circle area = " + area);
+        System.out.println("Circle Area = " + area);
     }
 }

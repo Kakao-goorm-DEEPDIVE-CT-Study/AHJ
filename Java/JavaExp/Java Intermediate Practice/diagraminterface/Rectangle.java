@@ -2,9 +2,9 @@ package java_intermediate.diagraminterface;
 
 public class Rectangle implements DiagramInterface{
 
-    double area;
-    int height;
-    int width;
+    private double area;
+    private int height;
+    private int width;
 
     public Rectangle(int height, int width) {
         this.height = height;
@@ -18,6 +18,6 @@ public class Rectangle implements DiagramInterface{
 
     @Override
     public void display() {
-        System.out.println("Rectangle area = " + area);
+        System.out.println("Rectangle Area = " + area);
     }
 }
