@@ -1,7 +1,7 @@
 package java_intermediate.employee;
 
 public class Manager extends Employee {
-    public String position;
+    private String position;
 
     public Manager(String name, int salary, String position){
         super(name, salary);
@@ -9,6 +9,6 @@ public class Manager extends Employee {
     }
     @Override
     public void displayInfo() {
-        System.out.println("이름 : " + name + " 급여 : " + salary + " 직책 : " + position);
+        System.out.println("이름 : " + getName() + " 급여 : " + getSalary() + " 직책 : " + position);
     }
 }
