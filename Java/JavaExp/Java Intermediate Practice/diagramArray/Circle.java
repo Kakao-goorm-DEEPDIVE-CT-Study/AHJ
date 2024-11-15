@@ -3,20 +3,16 @@ package java_intermediate.diagram;
 
 public class Circle extends Diagram{
 
-    int radius;
+    private int radius;
 
     public Circle(int radius) {
-        this.diagramName = "circle";
+        super("Circle");
         this.radius = radius;
     }
 
     @Override
     public void calculateArea(){
-        this.area = this.radius * this.radius * 3.14;
+        setArea(this.radius * this.radius * Math.PI);
     }
 
-    @Override
-    public void display() {
-        super.display();
-    }
 }

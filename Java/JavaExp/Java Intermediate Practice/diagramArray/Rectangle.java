@@ -2,22 +2,18 @@ package java_intermediate.diagram;
 
 public class Rectangle extends Diagram{
 
-    int height;
-    int width;
+    private int height;
+    private int width;
 
     public Rectangle(int height,int width) {
-        this.diagramName = "rectangle";
+        super("Rectangle");
         this.height = height;
         this.width = width;
     }
 
     @Override
     public void calculateArea() {
-        this.area = height * width;
+        setArea(height * width);
     }
 
-    @Override
-    public void display() {
-        super.display();
-    }
 }
