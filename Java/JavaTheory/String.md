@@ -35,15 +35,103 @@
     - 긴 문자열 변경시 많은 메모리를 사용함
     - 잦은 문자열 변경시 반복적으로 메모리를 할당하고 해제해야 하므로 성능 저하 발생
         - Garbage Collector 부담이 커짐
-- **StringBuilder**
-    - 가변 객체이므로 메모리 할당을 줄이고 성능 향상에 도움이 됨
-    
-    ```java
-    StringBuilder sb = new StringzBuilder("hello");
-    sb.append(" world");
-    System.out.println(sb.toString());
-    ```
-    
+
+### **StringBuilder**
+
+- 가변 객체이므로 메모리 할당을 줄이고 성능 향상에 도움이 됨
+    - 문자열 추가, 수정, 삭제 등의 작업이 빈번할때 유용
+
+```java
+StringBuilder sb = new StringzBuilder("hello");
+sb.append(" world");
+System.out.println(sb.toString());
+```
+
+- 메서드
+    - **insert()**
+        - 특정 위치에 문자열, 문자 삽입
+            
+            ```java
+            StringBuilder sb = new StringzBuilder("hello");
+            sb.insert(6, "world");
+            System.out.println(sb); -> hello world
+            ```
+            
+    - **delete()**
+        - 문자열의 특정 구간 삭제
+            
+            ```java
+            StringBuilder sb = new StringzBuilder("hello beautiful world");
+            sb.delete(6,16);
+            System.out.println(sb); -> hello world
+            ```
+            
+    - **deleteCharAt()**
+        - 특정 인덱스 문자 삭제
+            
+            ```java
+            StringBuilder sb = new StringzBuilder("hellon world");
+            sb.deleteCharAt(6);
+            System.out.println(sb);
+            ```
+            
+    - **setLength()**
+        - 문자열의 길이를 설정
+            - 줄이면 해당 부분 삭제
+            - 늘리면 null로 채워짐
+                
+                ```java
+                StringBuilder sb = new StringBuilder("Hello world!");
+                sb.setLength(5); 
+                System.out.println(sb); -> Hello
+                
+                sb.setLength(10); 
+                System.out.println(sb); -> Hello\u0000\u0000\u0000\u0000\u0000
+                ```
+                
+    - **reverse()**
+        - 문자열을 역순으로 변환
+            
+            ```java
+            StringBuilder sb = new StringBuilder("!dlrow olleH!");
+            sb.reverse(); 
+            System.out.println(sb); -> Hello World!
+            ```
+            
+    - **replace()**
+        - 특정 구간의 문자열을 다른 문자열과 교환
+            
+            ```java
+            StringBuilder sb = new StringBuilder("Hello world!");
+            sb.replace(6, 11, "Java");
+            System.out.println(sb); -> Hello Java!
+            ```
+            
+    - **setCharAt()**
+        - 특정 위치의 문자를 설정
+            
+            ```java
+            StringBuilder sb = new StringBuilder("Hello world!");
+            sb.setCharAt(6, 'W');
+            System.out.println(sb); -> Hello World!
+            ```
+            
+    - **length()**
+        - 문자열 길이 반환
+            
+            ```java
+            StringBuilder sb = new StringBuilder("123456");
+            System.out.println(sb.length); -> 6
+            ```
+            
+    - **toString()**
+        - StringBuilder를 문자열로 반환
+            
+            ```java
+            StringBuilder sb = new StringBuilder("Hello world!");
+            System.out.println(sb.toString); -> Hello world!
+            ```
+            
 
 ### String 메서드
 
@@ -183,3 +271,24 @@
     System.out.println(str); -> HELLO WORLD
     System.out.println(result); -> hello world
     ```
+    
+- indexOf()
+    - 문자, 문자열의 첫 번째 인덱스 반환
+        
+        ```java
+        String str = "Find me";
+        String target = "me";
+        int index = str.indexOf(target);
+        System.out.println(index) -> 5
+        ```
+        
+- toCharArray()
+    - 문자열을 문자 배열로 반환
+        
+        ```java
+        String str = "hello";
+        char[] charArray = str.tocharArray();
+        for(char c : charArray){
+        	System.out.println(c + " "); ->h e l l o
+        }
+        ```
