@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>HTML 태그 실습</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<!-- 헤더 섹션 -->
+	<header>
+		<h1>HTML 연습 페이지</h1>
+		<p>이 페이지는 HTML 태그를 연습하는 데 사용합니다.</p>
+	</header>
+	
+	<!-- 네비게이션 섹션 -->
+	<nav>
+		<ul>
+			<li><a href="#text">텍스트 태그</a></li>
+			<li><a href="#list">목록 태그</a></li>
+			<li><a href="#table">테이블 태그</a></li>
+			<li><a href="#form">폼 태그</a></li>
+		</ul>
+	</nav>
+
+	<main>
+		<!-- 텍스트 태그 -->
+		<section id="text">
+			<h2>텍스트 태그</h2>
+			<p><strong>강조 텍스트</strong>는 컨텐츠를 두껍게 표시합니다.</p>
+			<p><em>이텔릭 텍스트</em>는 컨텐츠를 기울여 표시합니다.</p>
+			<p><mark>하이라이트 텍스트</mark>는 텍스트를 강조합니다.</p>
+			<p><sub>아랫첨자 텍스트</sub>와 <sup>윗첨자 텍스트</sup>를 사용할 수 있습니다.</p>
+		</section>
+		
+		<!-- 목록 태그 -->
+		<section id="list">
+			<h2>목록 태그</h2>
+			<h3>순서가 있는 목록</h3>
+			<ol>
+				<li>첫번째 항목</li>
+				<li>두번째 항목</li>
+				<li>세벤째 항목</li>
+			</ol>
+			<h3>순서가 없는 목록</h3>
+			<ul>
+				<li>HTML</li>
+				<li>CSS</li>
+				<li>JavaScript</li>
+			</ul>
+		</section>
+		
+		<!-- 테이블 태그 -->
+		<section id="table">
+			<h2>테이블 태그</h2>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>이름</th>
+						<th>직업</th>
+						<th>지역</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>홍길동</td>
+						<td>개발자</td>
+						<td>서울</td>
+					</tr>
+					<tr>
+						<td>김철수</td>
+						<td>디자이너</td>
+						<td>부산</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		
+		<!-- 폼 태그 -->
+		<section id="form">
+			<h2>폼 태그</h2>
+			<form action="#" method="post">
+				<label for="name">이름:</label>
+				<input type="text" id="name", name="name"><br>
+				<label for="email">이메일:</label>
+				<input type="email" id="email" name="email"><br>
+				<label for="message">메시지:</label>
+				<textarea id="message" name="message"></textarea><br>
+				<input type="submit" value="전송">
+			</form>
+		</section>
+		
+	</main>
+	
+	<!-- 푸터 섹션 -->
+	<footer>
+		<p>&copy; 2024 HTML 연습 페이지 | 모든 권리 보유 </p>
+	</footer>
+</body>
+</html>
