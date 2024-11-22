@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>웹 기본 구조 연습</title>
+<link rel="stylesheet" href="CssExp.css">
+</head>
+<body>
+
+	<header>
+		<h1>My First Web Page</h1>
+	</header>
+	
+	<nav>
+		<ul>
+			<li><a href="#me">Me</a></li>
+			<li><a href="#table">Table</a></li>
+			<li><a href="#list">List</a></li>
+			<li><a href="#form">Form</a></li>
+			<li><a href="#block">Block</a></li>
+			<li><a href="#inline">Inline</a></li>
+			<li><a href="#inBlock">InlineBlock</a></li>
+			<li><a href="#footer">Footer</a></li>
+		</ul>
+	</nav>
+	
+	<main>
+	
+		<section id="me">
+			<h1>About Me</h1>
+			<p><sup>I learn</sup><sub>html</sub>
+			<p>I <em>learn</em> <strong>Html</strong></p>
+			<article><mark>He can Html</mark></article>
+		</section>
+		
+		<section id="table">
+			<h2>Table</h2>
+			<table border="2">
+				<thead>
+					<tr>
+						<td>html</td>
+						<td>css</td>
+						<td>js</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>V</td>
+						<td>V</td>
+						<td>V</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		
+		<section id="list">
+			<h2>List</h2>
+			<ol>
+				<li>Html</li>
+				<li>Css</li>
+				<li>JavaScript</li>
+			</ol>
+		</section>
+		
+		<section id="form">
+			<h2>Form</h2>
+			<form action="#" method="post">
+				<label for="name">이름 : </label>
+				<input type="text" id="name" name="name"><br>
+				<label for="learn">기술 : </label>
+				<input type="text" id="learn" name="learn">
+			</form>
+		</section>
+		
+		<section id="block">
+			<h2>Block</h2>
+			<div>I learn Html Block</div>
+			<div style="height:100px; line-height : 100px; text-align: center;">I LEARN HTML BLOCK</div>
+		</section>
+			
+		<section id="inline">
+			<h2>Inline</h2>
+			<span>I learn Html inline</span>
+			<span>I LEARN HTML INLINE</span>
+		</section>
+		<section id="inBlock">
+			<h2>Inline Block</h2>
+			<input type="button" value="Inline Block Button">
+			<input type="button" value="INLINE BLOCK BUTTON" style="width: 300px; height: 100px;">
+		</section>
+		
+	</main>
+	
+	<section id="footer">
+		<h2>Footer</h2>
+		<footer>&copy; Copyright 2024. My Web Page.</footer>
+	</section>
+	
+</body>
+</html>

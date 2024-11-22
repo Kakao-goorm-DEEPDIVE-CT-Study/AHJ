@@ -1,0 +1,75 @@
+@charset "UTF-8";
+body{
+	font-family: Arial, snas-serif;
+  max-width: 800px;
+	margin: 0 auto;
+	padding: 0;
+	line-height: 1.4;
+  text-align: center;
+}
+
+/** header 변경 **/
+header h1{
+	background-color: #D0F0FD;
+	color:white;
+	text-align:center;
+}
+
+/** nav 변 **/
+nav ul{
+	list-style: none;
+	display: flex;
+	justify-content: center;
+  background-color: #D0F0FD;
+}
+nav ul li{
+	margin: 0 20px;
+}
+nav ul li a{
+	font-size : 20px;
+  text-decoration: none;
+  color: black;
+}
+nav ul li a:hover{
+  color: blue;
+}
+/** ME **/
+#me{
+  text-align: center;
+}
+#me p, article{
+    border: 1px solid black;
+    margin: 15px; 
+    padding: 7px;
+}
+/** table **/
+#table table {
+    margin: 0 auto; /* 수평 중앙 정렬 */
+}
+#table thead{
+  background-color : #0077B0;
+}
+td, th {
+    width: 100px; 
+    height: 50px; 
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+}
+/** list **/
+#list ol{
+  list-style-position: inside;
+  text-align:left;
+  margin: 0 300px;
+}
+/** inline **/
+#inline span{
+  border: 1px solid black;
+  padding: 10px;
+  margin: 5px;
+}
+/**inline block**/
+#inBlock input{
+  padding: 10px;
+  margin: 15px;
+}
