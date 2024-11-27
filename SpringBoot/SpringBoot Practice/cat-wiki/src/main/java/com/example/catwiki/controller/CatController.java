@@ -33,12 +33,16 @@ public class CatController {
     public Cat getCatById(
             @PathVariable Long id
     ) {
-        for (Cat cat : catList) {
-            if(cat.getId().equals(id)) {
-                return cat;
-            }
-        }
-        return null;
+//        for (Cat cat : catList) {
+//            if(cat.getId().equals(id)) {
+//                return cat;
+//            }
+//        }
+//        return null;
+        Optional<Cat> cat = catList.stream()//Optional로 null 체크
+                .filter( c -> c.getId().equals(id)).findFirst();
+        return cat.orElse(null);
+
     }
 
     // 새로운 고양이 추가
