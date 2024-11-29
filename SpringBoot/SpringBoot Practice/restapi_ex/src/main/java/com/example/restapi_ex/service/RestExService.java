@@ -1,7 +1,7 @@
 package com.example.restapi_ex.service;
 
-import com.example.restapi_ex.controller.entity.ItemEntity;
-import com.example.restapi_ex.controller.entity.ItemRepository;
+import com.example.restapi_ex.entity.ItemEntity;
+import com.example.restapi_ex.entity.ItemRepository;
 import com.example.restapi_ex.controller.model.ItemDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
