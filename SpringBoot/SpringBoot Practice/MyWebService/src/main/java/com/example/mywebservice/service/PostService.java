@@ -1,6 +1,6 @@
 package com.example.mywebservice.service;
 
-import com.example.mywebservice.controller.model.PostCreateRequest;
+import com.example.mywebservice.controller.model.PostRequest;
 import com.example.mywebservice.controller.model.PostResponse;
 import com.example.mywebservice.entity.PostEntity;
 import com.example.mywebservice.entity.PostRepository;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -16,25 +17,31 @@ public class PostService {
     private final PostRepository postRepository;
 
     //작성하기
-    public PostResponse createPosts(PostCreateRequest postCreateRequest){
-        return entityToResponse(    postRepository.save(createRequestToEntity(postCreateRequest)));
+    public PostResponse createPosts(PostRequest postRequest){
+        return entityToResponse(postRepository.save(createRequestToEntity(postRequest)));
     }
+
     //목록보기
-    public List<PostEntity> getAllPosts(){
-        return postRepository.findAll();
+    public List<PostResponse> getAllPosts(){
+        return postRepository.findAll()
+                .stream()
+                .map(this::entityToResponse)
+                .collect(Collectors.toList());
     }
+
     //상세보기
-    public Optional<PostEntity> getPostById(Long id){
-        return postRepository.findById(id);
+    public Optional<PostResponse> getPostById(Long id){
+        return postRepository.findById(id)
+                .map(this::entityToResponse);
     }
     //수정하기
-    public PostEntity updatePost(Long id, PostEntity postEntity){
+    public PostResponse updatePost(Long id, PostRequest postRequest){
         return postRepository.findById(id)
                 .map(post -> {
-                    post.setTitle(postEntity.getTitle());
-                    post.setContent(postEntity.getContent());
-                    post.setAuthor(postEntity.getAuthor());
-                    return postRepository.save(post);
+                    post.setTitle(postRequest.getTitle());
+                    post.setContent(postRequest.getContent());
+                    post.setAuthor(postRequest.getAuthor());
+                    return entityToResponse(postRepository.save(post));
                 })
                 .orElseThrow(() -> new RuntimeException("Post not found"));
     }
@@ -44,11 +51,11 @@ public class PostService {
     }
 
     //
-    private PostEntity createRequestToEntity(PostCreateRequest postCreateRequest){
+    private PostEntity createRequestToEntity(PostRequest postRequest){
         PostEntity postEntity = new PostEntity(
-                postCreateRequest.getTitle(),
-                postCreateRequest.getContent(),
-                postCreateRequest.getAuthor()
+                postRequest.getTitle(),
+                postRequest.getContent(),
+                postRequest.getAuthor()
         );
         return postEntity;
     }
