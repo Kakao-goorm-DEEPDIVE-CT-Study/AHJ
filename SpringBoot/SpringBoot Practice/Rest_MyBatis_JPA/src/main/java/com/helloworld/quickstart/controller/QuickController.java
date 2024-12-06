@@ -40,10 +40,10 @@ public class QuickController {
         return "ok";
     }
 
-    @PostMapping("/item")
-    public ResponseDto registerItem(@RequestBody ItemDto item){
+    @PostMapping("/itemMyBatis")
+    public ResponseDto registerItemByMyBatis(@RequestBody ItemDto item){
         log.info("item : {} ",item);
-        boolean result = quickService.registerItem(item);
+        boolean result = quickService.registerItemByMyBatis(item);
         if(result){
             ResponseDto responseDto = new ResponseDto();
             responseDto.setMessage("ok");
@@ -55,8 +55,28 @@ public class QuickController {
         }
     }
 
-    @GetMapping("/item")
-    public ItemDto getItem(@RequestParam("id") String id){
-        return quickService.getItemById(id);
+    @PostMapping("/itemJPA")
+    public ResponseDto registerItemByJPA(@RequestBody ItemDto item){
+        log.info("item : {} ",item);
+        boolean result = quickService.registerItemByJPA(item);
+        if(result){
+            ResponseDto responseDto = new ResponseDto();
+            responseDto.setMessage("ok");
+            return responseDto;
+        } else {
+            ResponseDto responseDto = new ResponseDto();
+            responseDto.setMessage("fail");
+            return responseDto;
+        }
+    }
+
+    @GetMapping("/itemMyBatis")
+    public ItemDto getItemByMyBatis(@RequestParam("id") String id){
+        return quickService.getItemByIdMyBatis(id);
+    }
+
+    @GetMapping("/itemJPA")
+    public ItemDto getItemByJPA(@RequestParam("id") String id){
+        return quickService.getItemByIdMyBatis(id);
     }
 }
