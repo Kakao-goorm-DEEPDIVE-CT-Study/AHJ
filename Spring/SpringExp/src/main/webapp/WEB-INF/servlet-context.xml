@@ -8,7 +8,7 @@
            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
   <!-- 컴포넌트 스캔 설정 -->
-  <context:component-scan base-package="com.example.exp3" />
+  <context:component-scan base-package="com.example" />
 
   <!-- Spring MVC 활성화 -->
   <mvc:annotation-driven />
