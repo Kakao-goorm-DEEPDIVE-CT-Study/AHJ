@@ -11,5 +11,8 @@
         <property name="classA" ref="classA" />
     </bean>
 
+    <bean id="singleton" class="com.example.exp2.SingleTon" scope="singleton"/>
+    <bean id="prototype" class="com.example.exp2.ProtoType" scope="prototype"/>
+
 </beans>
 
