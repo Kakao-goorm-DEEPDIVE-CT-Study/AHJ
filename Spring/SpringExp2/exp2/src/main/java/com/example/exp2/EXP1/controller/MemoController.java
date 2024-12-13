@@ -1,7 +1,7 @@
-package com.example.exp2.controller;
+package com.example.exp2.EXP1.controller;
 
-import com.example.exp2.model.Memo;
-import com.example.exp2.service.MemoService;
+import com.example.exp2.EXP1.model.Memo;
+import com.example.exp2.EXP1.service.MemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

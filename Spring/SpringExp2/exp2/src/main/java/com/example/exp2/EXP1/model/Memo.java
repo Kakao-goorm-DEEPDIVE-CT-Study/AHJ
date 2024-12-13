@@ -1,4 +1,4 @@
-package com.example.exp2.model;
+package com.example.exp2.EXP1.model;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;

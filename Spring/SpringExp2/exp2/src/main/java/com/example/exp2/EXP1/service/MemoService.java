@@ -1,6 +1,6 @@
-package com.example.exp2.service;
+package com.example.exp2.EXP1.service;
 
-import com.example.exp2.model.Memo;
+import com.example.exp2.EXP1.model.Memo;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
