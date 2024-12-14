@@ -2,7 +2,7 @@ package com.example.restapi_ex.jpa.controller;
 
 import com.example.restapi_ex.jpa.controller.model.ItemDto;
 import com.example.restapi_ex.jpa.controller.model.ResponseDto;
-import com.example.restapi_ex.jpa.controller.service.RestExService;
+import com.example.restapi_ex.jpa.service.RestExService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

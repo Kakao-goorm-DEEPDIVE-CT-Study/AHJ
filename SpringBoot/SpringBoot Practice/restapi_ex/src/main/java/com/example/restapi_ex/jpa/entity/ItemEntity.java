@@ -1,4 +1,4 @@
-package com.example.restapi_ex.jpa.controller.entity;
+package com.example.restapi_ex.jpa.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
