@@ -37,7 +37,6 @@
 
   <div style="margin-top: 20px; text-align: center;">
     <button type="submit" style="width: 100px; height: 40px; margin: 5px;">View</button>
-  </div>
 </form>
 <form action="/edit" method="get" style="display:inline;">
   <input type="hidden" name="index" id="selectedIndex" />
