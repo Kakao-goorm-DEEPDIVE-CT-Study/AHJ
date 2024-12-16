@@ -5,7 +5,7 @@
     - 관심사에 맞게 프로그램 효율적으로 구성
     - 스프링 원칙에 부합하는 어플리케이션 구조 구성 가능
 
-
+---
 
 ## 2. 관심사와 제어권
 
@@ -58,7 +58,7 @@
 - **장점**:
     - 코드 유연성 및 확장성 증가
 
-
+---
 
 ## 3. Spring의 IoC
 
@@ -89,7 +89,7 @@
             - Singleton Registry로 관리
             - 강제로 제거되지 않는 한 어플리케이션 동작중 계속 유지
 
-
+---
 
 ## 4. 의존관계 주입 (Dependency Injection, DI)
 
@@ -146,7 +146,7 @@
         - **@Lazy** 어노테이션 사용
         - 설계 단계에서 의존성 제거
 
-
+---
 
 ## 5. AOP (Aspect-Oriented Programming)
 
@@ -163,19 +163,25 @@
     - **타겟(Target)**: 부가기능이 적용될 객체
     - **어드바이스(Advice)**: 타겟에 제공할 부가기능을 담은 모듈
     - **조인포인트(Join Point)**: 어드바이스 적용 가능 위치
+        - joinPoint.getSignature().getName()
+            - 포인트컷으로 선정된 메서드 이름
+        - joinPoint.getSignature().getDeclaringTypeName()
+            - 포인트컷으로 선정된 클래스 이름
+        - joinPoint.getArgs()
+            - 포인트컷으로 선정된 파라미터 값
     - **포인트컷(Pointcut)**: 특정 조건으로 객체의 메서드를 선정
 - Annotation 기반 AOP 설정
     - 의존성 : spring-aop, aspectjrt, aspectjweaver
 - 주요 Annotation
 
-    | 어노테이션 | 설명 | 예제 |
-    | --- | --- | --- |
-    | @Before | 메서드 실행 이전에 동작하는 어드바이스를 정의 | @Before("execution(* com.example.demo.UserService.*(..))") |
-    | @After | 메서드 실행 후에(성공 여부와 상관없이) 동작하는 어드바이스를 정의 | @After("execution(* com.example.demo.UserService.*(..))") |
-    | @AfterReturning | 메서드가 정상적으로 실행된 후 동작하는 어드바이스를 정의 | @AfterReturning("execution(* com.example.demo.UserService.*(..))") |
-    | @AfterThrowing | 메서드 실행 중 예외가 발생했을 때 동작하는 어드바이스를 정의 | @AfterThrowing("execution(* com.example.demo.UserService.*(..))") |
-    | @Around | 대상 메서드 실행 전후 모두 동작하며, 메서드 실행을 제어하거나 반환 값 수정 가능 | @Around("execution(* com.example.demo.UserService.*(..))") |
-    | @Pointcut | 공통으로 사용될 포인트컷 표현식을 재사용 가능하게 정의 | @Pointcut("execution(* com.example.demo.UserService.*(..))") |
+| 어노테이션 | 설명 | 예제 |
+| --- | --- | --- |
+| @Before | 메서드 실행 이전에 동작하는 어드바이스를 정의 | @Before("execution(* com.example.demo.UserService.*(..))") |
+| @After | 메서드 실행 후에(성공 여부와 상관없이) 동작하는 어드바이스를 정의 | @After("execution(* com.example.demo.UserService.*(..))") |
+| @AfterReturning | 메서드가 정상적으로 실행된 후 동작하는 어드바이스를 정의 | @AfterReturning("execution(* com.example.demo.UserService.*(..))") |
+| @AfterThrowing | 메서드 실행 중 예외가 발생했을 때 동작하는 어드바이스를 정의 | @AfterThrowing("execution(* com.example.demo.UserService.*(..))") |
+| @Around | 대상 메서드 실행 전후 모두 동작하며, 메서드 실행을 제어하거나 반환 값 수정 가능 | @Around("execution(* com.example.demo.UserService.*(..))") |
+| @Pointcut | 공통으로 사용될 포인트컷 표현식을 재사용 가능하게 정의 | @Pointcut("execution(* com.example.demo.UserService.*(..))") |
 - **활용**
     - **로깅**: 메서드 호출 전후 로깅
     - **트랜잭션 관리**: 데이터베이스 작업 전후에 트랜잭션 처리
