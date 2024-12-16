@@ -201,9 +201,70 @@
     ```
     
 
-## 7. 리다이렉트란
+# **7. Spring MVC의 데이터 바인딩 원리**
 
-### 리다이렉트
+- Spring의 @ModelAttribute와 데이터 바인딩 메커니즘을 통해 처리
+- HTML <form> 태그의 name 속성을 통해 사용자가 입력한 데이터를 컨트롤러로 전송
+- Spring MVC는 요청 데이터를 Java 객체(User)로 자동 매핑
+
+**동작 과정**
+
+1. JSP에서 데이터 전송
+    - JSP에서 <form> 태그로 입력 데이터를 서버로 전송
+    - 각 <input> 태그의 name 속성이 요청 파라미터의 키로 작동
+    - <form>의 action 속성으로 요청 경로 지정
+    
+    ```html
+    <form action="/register" method="post">
+        ID: <input type="text" name="id"><br>
+        비밀번호: <input type="password" name="password"><br>
+        이메일: <input type="text" name="email"><br>
+        <button type="submit">회원가입</button>
+    </form>
+    ```
+    
+2. 컨트롤러에서 데이터 처리
+    - 컨트롤러 메서드에서 @ModelAttribute를 사용해 요청 데이터를 Java 객체로 매핑
+    
+    ```java
+    @PostMapping("/register")
+    public String register(@ModelAttribute("user") User user, Model model)
+    ```
+    
+3. User 객체와 요청 데이터 매핑
+    - Spring은 요청 파라미터(id, password, email)를 User 객체의 필드에 자동으로 매핑.
+    - 매핑 기준
+        - 요청 파라미터의 이름 == Java 객체의 필드 이름
+        - 기본 생성자와 getter/setter가 필요.
+    
+    ```java
+    @Data
+    public class User {
+        private String id;
+        private String password;
+        private String email;
+    }
+    ```
+    
+4. 결과 데이터 처리
+    - 컨트롤러에서 model.addAttribute를 통해 JSP로 메시지를 전달
+    - JSP에서 ${message}로 메시지를 출력
+    
+    ```java
+    @PostMapping("/register")
+    public String register(@ModelAttribute("user") User user, Model model) {
+        String result = userService.registerUser(user.getId(), user.getPassword(), user.getEmail());
+        model.addAttribute("message", result);
+        return result.equals("회원가입 성공") ? "redirect:/login" : "register";
+    }
+    ```
+    
+    ```html
+    <p>${message != null ? message : ''}</p>
+    ```
+    
+
+# 8. 리다이렉트란
 
 - 서버가 클라이언트에게 새로운 URL로 요청을 다시 보내도록 지시하는 것
 - 클라이언트는 서버의 응답을 받은 후 지정된 URL로 GET 요청
@@ -221,7 +282,7 @@ public String addMemo(@ModelAttribute Memo memo) {
 }
 ```
 
-### 일반 호출이란
+**일반 호출이란**
 
 - 서버가 요청을 처리한 뒤 바로 응답을 반환하여 뷰를 렌더링
 - 클라이언트는 새로운 요청을 보내지 않고 응답을 받음
@@ -238,7 +299,7 @@ public String addMemo(@ModelAttribute Memo memo, Model model) {
 }
 ```
 
-### 주요 차이점
+**주요 차이점**
 
 - 요청 흐름
     - 리다이렉트 : 클라이언트가 서버 응답을 받은 후 새 URL로 GET 요청을 다시 전송
@@ -250,7 +311,7 @@ public String addMemo(@ModelAttribute Memo memo, Model model) {
     - 리다이렉트 : 새로운 요청에서는 이전 요청 데이터를 사용할 수 없음
     - 일반 호출 : 같은 요청 내에서 데이터를 유지할 수 있음
 
-### 사용하는 상황과 고려 사항
+**사용하는 상황과 고려 사항**
 
 - 리다이렉트는 데이터가 변경되는 작업 후 최신 상태를 보여주고 싶을 때 사용
 - ex) 메모를 삭제한 후 최신 리스트를 보여줄 때 적합 POST-Redirect-GET 패턴을 구현하여 데이터 중복 처리를 방지 가능
@@ -275,7 +336,7 @@ public String addMemo(@ModelAttribute Memo memo, Model model) {
     ```
     
 
-## 주요 어노테이션 정리
+# 주요 어노테이션 정리
 
 | 어노테이션 | 설명 |
 | --- | --- |
