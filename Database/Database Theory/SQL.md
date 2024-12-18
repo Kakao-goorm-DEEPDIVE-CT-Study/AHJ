@@ -111,7 +111,30 @@
     ```
     
 
-## **4. 데이터 삽입 (INSERT INTO)**
+# 4. DDL
+
+## 1. DB, 테이블 생성(CREATE)
+
+- 데이터베이스, 테이블 생성
+- 예제 :
+    
+    ```sql
+    CREATE DATABASE user;
+    
+    CREATE TABLE `user`(
+    	id BIGINT(32) NOT NULL AUTO_INCREMENT COMMENT 'index',
+        name VARCHAR(50) NOT NULL COMMENT '사용자 이름',
+        age INT NULL DEFAULT '1' COMMENT '사용자 나이',
+        email VARCHAR(100) NULL DEFAULT '' COMMENT '이메일 주소',
+    	
+        PRIMARY KEY(id)
+    );
+    ```
+    
+
+# 5. DML
+
+## **1. 데이터 삽입 (INSERT)**
 
 - **INSERT INTO** : 명령어를 사용하여 테이블에 데이터를 추가
 - Primary Key 값이 중복되면 에러 발생
@@ -122,7 +145,7 @@
 - 값은 테이블의 열 순서와 일치해야 함
     
     ```sql
-    INSERT INTO 테이블명 VALUES (값1, 값2, 값3, ...);
+    INSERT INTO 테이블명 (열1, 열2, 열3, ...) VALUES (값1, 값2, 값3, ...);
     ```
     
 - 예제 :
@@ -177,7 +200,7 @@
         ```
         
 
-## 5. 데이터 조회(SELECT)
+## 2. 데이터 조회(SELECT)
 
 **1. Projection**
 
@@ -301,7 +324,7 @@
     ```
     
 
-## **5. 데이터 수정 (UPDATE)**
+## **3. 데이터 수정 (UPDATE)**
 
 - 특정 조건을 만족하는 데이터의 값을 수정
 - 조건절(WHERE)을 생략하면 모든 행의 값이 수정되므로 주의.
@@ -331,7 +354,7 @@
         ```
         
 
-## **6. 데이터 삭제 (DELETE FROM)**
+## **4. 데이터 삭제 (DELETE)**
 
 - 특정 조건을 만족하는 행 삭제:
 - 조건절(WHERE)을 생략하면 모든 데이터가 삭제됨.
