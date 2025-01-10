@@ -8,6 +8,12 @@
   - 실수 저장
 - VARCHAR
   - 문자 저장
+  - 유연하게 저장
+  - ex) varchar(5) 에 input “a”가 들어온 경우 a만 입력됨
+- CHAR
+  - 문자 저장
+  - 유연하지 않게 저장
+  - ex) char(5)에 input “a”가 들어온 경우 a\_\_\_\_가 입력됨
 - LONGTEXT
   - 6만이 넘어가는 문자 저장
 - DATETIME
@@ -24,5 +30,5 @@
   - TIMEZONE 고려
 - TINYINT(1)
   - TRUE / FALSE
-- CHAR, FLOAT, DOUBLE, TEXT
+- FLOAT, DOUBLE, TEXT
   - 잘 사용하지 않음
