@@ -23,44 +23,201 @@
     - 코드 간결, 생산성 향상
 
 ## **4. MyBatis**
-
+- Java 기반의 데이터베이스 접근 프레임워크
 - SQL 중심 개발 + 객체 매핑을 지원하는 방식
+    - SQL을 명시적으로 작성하지만 데이터 매핑 작업을 자동화함
     - JDBC와 비슷한 SQL 중심 접근 방식 + 동적 SQL 생성, 자동 객체 매핑
         - 복잡도를 낮춤
-        - 자동 객체 매핑
-            
-            ```java
-            <resultMap id="UserMap" type="User">
-                <result property="id" column="user_id"/>
-                <result property="name" column="user_name"/>
-            </resultMap>
-            
-            <select id="getUserById" resultMap="UserMap">
-                SELECT user_id, user_name FROM users WHERE user_id = #{id}
-            </select>
-            ```
-            
-        - 동적 SQL
-            
-            ```java
-            <select id="findUsers" resultType="User">
-                SELECT * FROM users
-                <where>
-                    <if test="name != null">
-                        name = #{name}
-                    </if>
-                    <if test="age != null">
-                        AND age = #{age}
-                    </if>
-                </where>
-            </select>
-            ```
-            
-- **사용 사례 :**
-    - 완전한 ORM은 아니지만 객체 매핑 필요할 때
-    - 복잡한 쿼리나 조건부 동적SQL 필요 시
-    - JPA의 완전한 ORM기능이 불필요할때
-    - 레거시 데이터베이스와 통합이 필요할 때
+
+**✅ 주요특징**
+
+- SQL 매핑 지원
+    - SQL을 XML파일 또는 어노테이션으로 관리
+    - SQL 작성의 자유도를 제공하면서 객체,테이블간 매핑을 간단하게 처리
+- 객체 매핑
+    - SQL 결과를 Java 객체로 매핑
+    - Java 객체를 SQL 파라미터로 사용
+- 다양한 DB 지원
+    - JDBC 기반으로 동작하기 때문에 다양한 데이터베이스와 호환가능
+- 동적 쿼리 가능
+    - **\<if\>** : if문과 동일
+        
+        ```xml
+        <if test="title != null">
+            title = #{title}
+        </if>
+        ```
+        
+    - **\<choose\>, \<when\>, \<otherwise\>** : else if, switch 문과 동일
+        
+        ```xml
+        <choose>
+            <when test="title != null">
+                title = #{title}
+            </when>
+            <when test="regUser != null">
+                reg_user = #{regUser}
+            </when>
+            <otherwise>
+                reg_date >= CURRENT_DATE
+            </otherwise>
+        </choose>
+        ```
+        
+    - **\<where\>** : SQL의 where절
+        
+        ```xml
+        <where>
+            <if test="title != null">
+                title = #{title}
+            </if>
+            <if test="regUser != null">
+                AND reg_user = #{regUser}
+            </if>
+        </where>
+        ```
+        
+    - **\<foreach\>**
+        
+        ```xml
+        <foreach collection="boards" item="board" separator=",">
+            (#{board.title}, #{board.contents})
+        </foreach>
+        
+        ```
+        
+
+**✅ 매핑 구성요소**
+
+- **parameterType**
+    - SQL 문장에 전달될 파라미터의 데이터 타입을 지정
+    - 주로 \<select\>, \<insert\>, \<update\>, \<delete\> 태그에서 사용
+    - 예제
+        
+        ```xml
+        <select id="getPostById" parameterType="long" resultType="Board">
+            SELECT * FROM board WHERE seq = #{seq}
+        </select>
+        ```
+        
+- **resultType**
+    - SQL 실행 결과의 반환 데이터 타입을 지정
+    - 주로 \<select\>태그에서 사용
+    - 예제
+        - SQL 결과가 Board 객체에 매핑됨
+        
+        ```xml
+        <select id="getAllPosts" resultType="Board">
+            SELECT * FROM board
+        </select>
+        ```
+        
+- resultMap
+    - 커스텀 매핑 규칙을 정의
+        - 복잡한 매핑방식 처리 가능
+    - 주로 \<select\>에서 사용
+    - 예제
+        
+        ```xml
+        <resultMap id="BoardResultMap" type="Board">
+            <id property="seq" column="seq" />
+            <result property="title" column="title" />
+            <result property="contents" column="contents" />
+            <result property="regUser" column="reg_user" />
+            <result property="regDate" column="reg_date" />
+        </resultMap>
+        
+        <select id="getAllPosts" resultMap="BoardResultMap">
+            SELECT * FROM board
+        </select>
+        ```
+        
+
+**✅ xml 비교연산자**
+
+- < : &lt;
+- <= : &lt;=
+- > : &gt;
+- >= : &gt;=
+
+**✅동작 과정**
+
+- 설정 파일 로드
+    - application.properties에서 데이터베이스 연결 및 매퍼 설정 로드
+        
+        ```yaml
+        spring.application.name=mybatis
+        server.port=8088
+        
+        mybatis.mapper-locations=classpath:/mappers/*.xml
+        mybatis.configuration.map-underscore-to-camel-case=true
+        #h2
+        spring.sql.init.schema-locations=classpath:/db/h2/schema.sql
+        spring.sql.init.data-locations=classpath:/db/h2/data.sql
+        # spring - database
+        spring.datasource.driverClassName=org.h2.Driver
+        # In-Memory mode
+        spring.datasource.url=jdbc:h2:mem:topolo
+        spring.datasource.username=sa
+        spring.datasource.password=
+        ```
+        
+- SQL 매핑
+    - XML, 어노테이션을 통해 SQL을 정의하고 Java 객체를 매핑
+    - BoardMapper.xml
+        
+        ```xml
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <mapper namespace="io.goorm.mybatis.mapper.BoardMapper">
+            <!--  SELECT  -->
+            <select id="selectAll" resultType="io.goorm.mybatis.board.model.Board"> SELECT * FROM board ORDER BY seq desc </select>
+            <select id="selectById" parameterType="long" resultType="io.goorm.mybatis.board.model.Board"> SELECT * FROM board WHERE seq = #{seq} </select>
+            <!--  INSERT  -->
+            <insert id="insert" parameterType="io.goorm.mybatis.board.model.Board"> INSERT INTO board (title, contents, reg_user) VALUES (#{board.title}, #{board.contents}, #{board.regUser}) </insert>
+            <!--  UPDATE  -->
+            <update id="update" parameterType="io.goorm.mybatis.board.model.Board"> UPDATE board SET title = #{board.title}, contents = #{board.contents} WHERE seq = #{board.seq} </update>
+            <!--  DELETE  -->
+            <delete id="delete" parameterType="long"> DELETE FROM board WHERE seq = #{seq} </delete>
+        </mapper>
+        ```
+        
+- SQL 실행
+    - Mapper 인터페이스를 통해 SQL 실행
+    - BoardMapper.java
+        
+        ```java
+        package io.goorm.mybatis.mapper;
+        
+        import io.goorm.mybatis.board.model.Board;
+        import org.apache.ibatis.annotations.Mapper;
+        import org.apache.ibatis.annotations.Param;
+        
+        import java.util.List;
+        
+        @Mapper
+        public interface BoardMapper {
+            List<Board> selectAll();
+        
+            Board selectById(@Param("seq") long seq);
+        
+            int insert(@Param("board") Board board);
+        
+            int update(@Param("board") Board board);
+        
+            int delete(@Param("seq") long seq);
+        }
+        
+        ```
+        
+- 결과 반환
+
+✅ **사용 사례**
+
+- 완전한 ORM은 아니지만 객체 매핑 필요할 때
+- 복잡한 쿼리나 조건부 동적SQL 필요 시
+- JPA의 완전한 ORM기능이 불필요할때
+- 레거시 데이터베이스와 통합이 필요할 때
 
 ## **5. JPA (Java Persistence API)**
 
