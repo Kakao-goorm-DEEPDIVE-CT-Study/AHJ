@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.goorm.mybatis.dynamic.mapper.DynamicMapper">
+    <resultMap id="boardResultMap" type="io.goorm.mybatis.board.model.Board">
+        <result column="seq" property="seq"/>
+        <result column="title" property="title"/>
+        <result column="contents" property="contents"/>
+        <result column="reg_user" property="regUser"/>
+        <result column="reg_date" property="regDate"/>
+    </resultMap>
+    <select id="selectAll" resultMap="boardResultMap"> SELECT * FROM board </select>
+    <select id="select2" resultType="io.goorm.mybatis.board.model.Board">
+        SELECT * FROM board
+        <if test="orderBy != null"> ORDER BY ${orderBy} ${orderDirection} </if>
+    </select>
+    <!--  SELECT  -->
+    <select id="select3" resultType="io.goorm.mybatis.board.model.Board">
+        SELECT * FROM board
+        <where>
+            <if test="ids != null and ids.length > 0">
+                reg_user IN
+                <foreach item="id" index="index" collection="ids" open="(" separator="," close=")"> #{id} </foreach>
+            </if>
+        </where>
+    </select>
+    <!--  SELECT  -->
+    <select id="select4" resultType="io.goorm.mybatis.board.model.Board">
+        SELECT * FROM board
+        <where>
+            <choose>
+                <when test="condition == 'all' and searchtxt != null"> ( title LIKE CONCAT('%', #{searchtxt}, '%') OR contents LIKE CONCAT('%', #{searchtxt}, '%') ) </when>
+                <when test="condition == 'title'"> title LIKE CONCAT('%', #{searchtxt}, '%') </when>
+                <otherwise>
+                    <if test="condition == 'contents'"> contents LIKE CONCAT('%', #{searchtxt}, '%') </if>
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+</mapper>
