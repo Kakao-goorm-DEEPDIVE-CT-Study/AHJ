@@ -113,7 +113,7 @@
         </select>
         ```
         
-- resultMap
+- **resultMap**
     - 커스텀 매핑 규칙을 정의
         - 복잡한 매핑방식 처리 가능
     - 주로 <select>에서 사용
@@ -130,6 +130,28 @@
         
         <select id="getAllPosts" resultMap="BoardResultMap">
             SELECT * FROM board
+        </select>
+        ```
+        
+- **${}**
+    - SQL 쿼리 내에 문자열 그대로 삽입
+    - SQL Injection 취약
+        
+        ```xml
+        <select id="findUser" resultType="User">
+            SELECT * FROM users WHERE name = '${name}'
+        </select>
+        
+        -> SELECT * FROM users WHERE name = JOHN
+        ```
+        
+- **#{}**
+    - Prepared Statement 방식으로 값을 처리
+    - SQL Injection 방지 가능
+        
+        ```xml
+        <select id="findUser" resultType="User">
+            SELECT * FROM users WHERE name = #{name}
         </select>
         ```
         
