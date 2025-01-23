@@ -23,6 +23,7 @@
     - 코드 간결, 생산성 향상
 
 ## **4. MyBatis**
+
 - Java 기반의 데이터베이스 접근 프레임워크
 - SQL 중심 개발 + 객체 매핑을 지원하는 방식
     - SQL을 명시적으로 작성하지만 데이터 매핑 작업을 자동화함
@@ -40,7 +41,7 @@
 - 다양한 DB 지원
     - JDBC 기반으로 동작하기 때문에 다양한 데이터베이스와 호환가능
 - 동적 쿼리 가능
-    - **\<if\>** : if문과 동일
+    - **<if>** : if문과 동일
         
         ```xml
         <if test="title != null">
@@ -48,7 +49,7 @@
         </if>
         ```
         
-    - **\<choose\>, \<when\>, \<otherwise\>** : else if, switch 문과 동일
+    - **<choose>, <when>, <otherwise>** : else if, switch 문과 동일
         
         ```xml
         <choose>
@@ -64,7 +65,7 @@
         </choose>
         ```
         
-    - **\<where\>** : SQL의 where절
+    - **<where>** : SQL의 where절
         
         ```xml
         <where>
@@ -77,7 +78,7 @@
         </where>
         ```
         
-    - **\<foreach\>**
+    - **<foreach>**
         
         ```xml
         <foreach collection="boards" item="board" separator=",">
@@ -91,7 +92,7 @@
 
 - **parameterType**
     - SQL 문장에 전달될 파라미터의 데이터 타입을 지정
-    - 주로 \<select\>, \<insert\>, \<update\>, \<delete\> 태그에서 사용
+    - 주로 <select>, <insert>, <update>, <delete> 태그에서 사용
     - 예제
         
         ```xml
@@ -102,7 +103,7 @@
         
 - **resultType**
     - SQL 실행 결과의 반환 데이터 타입을 지정
-    - 주로 \<select\>태그에서 사용
+    - 주로 <select>태그에서 사용
     - 예제
         - SQL 결과가 Board 객체에 매핑됨
         
@@ -115,7 +116,7 @@
 - resultMap
     - 커스텀 매핑 규칙을 정의
         - 복잡한 매핑방식 처리 가능
-    - 주로 \<select\>에서 사용
+    - 주로 <select>에서 사용
     - 예제
         
         ```xml
@@ -182,6 +183,25 @@
         </mapper>
         ```
         
+    - 다중 매개변수 매핑
+        - Mapper Interface
+            
+            ```java
+            int update(@Param("id") int id, @Param("board") Board board);
+            ```
+            
+        - Mapper XML
+            - Map<String, Object> 형태로 매핑됨
+                - ex) map.put(”id”, id);   map.put(”board”,board);
+            
+            ```xml
+            <update id="update" parameterType="map">
+                UPDATE board
+                SET title = #{board.title}, content = #{board.content}
+                WHERE id = #{id};
+            </update>
+            ```
+            
 - SQL 실행
     - Mapper 인터페이스를 통해 SQL 실행
     - BoardMapper.java
