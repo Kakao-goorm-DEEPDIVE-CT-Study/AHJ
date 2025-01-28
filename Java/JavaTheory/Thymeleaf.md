@@ -96,3 +96,26 @@
     <div th:insert="~{fragment :: footer}"></div>
     
     ```
+## Thymeleaf 적용 방법
+
+- build.gradle
+    
+    ```java
+    dependencies{
+    	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    }
+    ```
+    
+- application.properties
+    
+    ```html
+    spring.thymeleaf.cache=false
+    spring.devtools.livereload.enabled=true
+    ```
+    
+    - spring.thymeleaf.cache=false
+        - Spring boot는 Thymeleaf 템플릿 파일을 캐싱하여 성능을 최적화
+        - 개발환경에서는 템플릿 수정과 즉각적인 반영이 필수이기에 false로 지정
+    - spring.devtools.livereload.enabled=true
+        - Spring boot Devtools에서 제공하는 LiveReload 기능을 활성화
+            - 브라우저와 연결된 상태에서 HTML, CSS, JacaScript등이 변경되면 브라우저를 새로 고침함
