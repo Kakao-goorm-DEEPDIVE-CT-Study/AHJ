@@ -72,3 +72,28 @@
     - @PathVariable, @RequestParam: URI 경로, 쿼리 파라미터로 데이터 받음
 3. **응답 데이터 처리**
     - @ResponseBody: 자바 객체를 JSON 형식으로 변환해 반환
+    
+## html form 태그에서 PUT, DELETE 사용 방법
+
+- form은 기본적으로 GET, POST만 지원
+- hidden input 사용
+    
+    ```html
+    <form action="/target/api" method="POST">
+    			<input type="hidden" name="_method" value="DELETE"/>
+    </form>
+    ```
+    
+    - 서버 설정 필요
+        
+        ```xml
+        spring.mvc.hiddenmethod.filter.enabled=true
+        ```
+        
+- thymeleaf 방식 사용
+    
+    ```html
+    <form action="#" th:action="/target/api" method="#" th:method="delete">
+    
+    </form>
+    ```
