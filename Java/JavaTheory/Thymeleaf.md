@@ -119,3 +119,87 @@
     - spring.devtools.livereload.enabled=true
         - Spring boot Devtools에서 제공하는 LiveReload 기능을 활성화
             - 브라우저와 연결된 상태에서 HTML, CSS, JacaScript등이 변경되면 브라우저를 새로 고침함
+
+## Thymeleaf Layout
+
+- HTML 템플릿을 재사용할 수 있도록 도와주느 것
+- 공통 레이아웃을 한곳에서 관리
+
+**✅ 적용**
+
+- build.gradle
+    
+    ```java
+    	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    ```
+    
+- html
+    - layout
+        - 위치 : templates/layout
+        
+        ```java
+        <!DOCTYPE html>
+        <html xmlns:th="http://www.thymeleaf.org">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title th:text="${title}">Default Title</title>
+          <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        </head>
+        <body>
+        <!-- 상단 네비게이션 바 -->
+        <header class="bg-blue-500 text-white p-4 flex justify-between items-center">
+          <div class="flex items-center space-x-4">
+            <img src="/img/goormedu-public.png" alt="로고" class="h-8">
+            <a href="#" class="text-white hover:underline">관리자 관리</a>
+            <a href="#" class="text-white hover:underline">사용자 관리</a>
+          </div>
+          <div class="flex items-center space-x-4">
+            <span>홍길동</span>
+            <a href="#" class="text-white hover:underline">로그아웃</a>
+          </div>
+        </header>
+        
+        <main>
+          <!-- 여기서 layout:fragment="content"가 각 페이지에서 오버라이드됨 -->
+          <div layout:fragment="content">
+            <p>Default Content</p>
+          </div>
+        </main>
+        
+        <!-- 하단 라이센스 정보 -->
+        <footer class="bg-gray-800 text-white p-4 text-center">
+          © 2025 goorm All rights reserved.
+        </footer>
+        
+        </body>
+        </html>
+        ```
+        
+    - html
+        
+        ```java
+        <!DOCTYPE html>
+        <html xmlns:th="http://www.thymeleaf.org"
+              xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+              layout:decorate="~{layout/admin-layout}">
+        
+            <!-- 메인 컨텐츠 -->
+            <main layout:fragment="content" class="flex-grow p-8">
+            <h1 class="text-2xl font-bold mb-6">관리자 등록</h1>
+            <form class="bg-white p-4 rounded-lg shadow-lg">
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium text-gray-700">이름</label>
+                    <input type="text" id="name" class="w-full border border-gray-300 rounded-lg p-2">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-gray-700">이메일</label>
+                    <input type="email" id="email" class="w-full border border-gray-300 rounded-lg p-2">
+                </div>
+                <button type="submit" class="w-full bg-green-500 text-white rounded-lg px-4 py-2">등록</button>
+            </form>
+            </main>
+        
+        </html>
+        
+        ```
